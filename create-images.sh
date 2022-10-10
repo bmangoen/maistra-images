@@ -258,12 +258,7 @@ function exec_build() {
 
 ## MAIN
 printenv
-
-echo "DEBUG: docker pull quay.io/bmangoen/hive-operator"
-docker info
-docker pull quay.io/bmangoen/hive-operator:v4.0
-docker tag quay.io/bmangoen/hive-operator:v4.0 quay.io/bmangoen/hive-operator:latest
-docker push quay.io/bmangoen/hive-operator:latest
+ls ${DOCKER_CONFIG}
 
 while getopts ":t:h:i:c:bdpk" opt; do
 	case ${opt} in
