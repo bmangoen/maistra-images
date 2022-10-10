@@ -260,7 +260,7 @@ function exec_build() {
 printenv
 if [ -d "${DOCKER_CONFIG}" ]; then
   ls "${DOCKER_CONFIG}"
-  cat "${DOCKER_CONFIG}"/config.json
+  cat "${DOCKER_CONFIG}"config.json
 fi
 
 echo "DEBUG: ${DOCKER_CONFIG}"
