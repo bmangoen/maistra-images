@@ -260,6 +260,7 @@ function exec_build() {
 printenv
 
 echo "DEBUG: docker pull quay.io/bmangoen/hive-operator"
+docker info
 docker pull quay.io/bmangoen/hive-operator:v4.0
 docker tag quay.io/bmangoen/hive-operator:v4.0 quay.io/bmangoen/hive-operator:latest
 docker push quay.io/bmangoen/hive-operator:latest
