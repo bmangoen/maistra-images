@@ -6,12 +6,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 : "${MAISTRA_VERSION:=2.2}"
 
-: "${MAISTRA_PROJECT:=https://github.com/maistra}"
+: "${MAISTRA_PROJECT:=https://github.com/bmangoen}"
 
 : "${HUB:=quay.io/bmangoen}"
 : "${TAG:="${MAISTRA_VERSION}"}"
 
-: "${ISTIO_REPO:="${MAISTRA_PROJECT}/istio.git"}"
+: "${ISTIO_REPO:="${MAISTRA_PROJECT}/maistra-istio.git"}"
 : "${ISTIO_BRANCH:="maistra-${MAISTRA_VERSION}"}"
 
 : "${REPOSDIR:="${DIR}/tmp"}"
