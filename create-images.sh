@@ -6,12 +6,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 : "${MAISTRA_VERSION:=2.2}"
 
-: "${MAISTRA_PROJECT:=https://github.com/bmangoen}"
+: "${MAISTRA_PROJECT:=https://github.com/maistra}"
 
 : "${HUB:=quay.io/bmangoen}"
 : "${TAG:="${MAISTRA_VERSION}"}"
 
-: "${ISTIO_REPO:="${MAISTRA_PROJECT}/maistra-istio.git"}"
+: "${ISTIO_REPO:="${MAISTRA_PROJECT}/istio.git"}"
 : "${ISTIO_BRANCH:="maistra-${MAISTRA_VERSION}"}"
 
 : "${REPOSDIR:="${DIR}/tmp"}"
@@ -257,6 +257,15 @@ function exec_build() {
 }
 
 ## MAIN
+printenv
+if [ -d "${DOCKER_CONFIG}" ]; then
+  ls "${DOCKER_CONFIG}"
+  cat "${DOCKER_CONFIG}"/config.json
+fi
+
+echo "DEBUG: ${DOCKER_CONFIG}"
+echo "DEBUG: ${ISTIO_REPO}:${ISTIO_BRANCH}"
+
 while getopts ":t:h:i:c:bdpk" opt; do
 	case ${opt} in
 		t) TAG="${OPTARG}";;
@@ -297,16 +306,6 @@ if [ -n "${DELETE}" ]; then
 fi
 
 if [ -n "${BUILD}" ] || [ -n "${PUSH}" ]; then
-
-  printenv
-  if [ -d "${DOCKER_CONFIG}" ]; then
-    ls "${DOCKER_CONFIG}"
-    cat "${DOCKER_CONFIG}"/config.json
-  fi
-
-  echo "DEBUG: ${DOCKER_CONFIG}"
-  echo "DEBUG: ${ISTIO_REPO}:${ISTIO_BRANCH}"
-
 
   [ ! -d "${REPOSDIR}" ] && mkdir "${REPOSDIR}"
   trap 'echo "Removing ${REPOSDIR}" && ${RM} -rf "${REPOSDIR}"' EXIT
