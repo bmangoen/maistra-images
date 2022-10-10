@@ -257,15 +257,6 @@ function exec_build() {
 }
 
 ## MAIN
-printenv
-if [ -d "${DOCKER_CONFIG}" ]; then
-  ls "${DOCKER_CONFIG}"
-  cat "${DOCKER_CONFIG}"/config.json
-fi
-
-echo "DEBUG: ${DOCKER_CONFIG}"
-echo "DEBUG: ${ISTIO_REPO}:${ISTIO_BRANCH}"
-
 while getopts ":t:h:i:c:bdpk" opt; do
 	case ${opt} in
 		t) TAG="${OPTARG}";;
@@ -306,6 +297,17 @@ if [ -n "${DELETE}" ]; then
 fi
 
 if [ -n "${BUILD}" ] || [ -n "${PUSH}" ]; then
+
+  printenv
+  if [ -d "${DOCKER_CONFIG}" ]; then
+    ls "${DOCKER_CONFIG}"
+    cat "${DOCKER_CONFIG}"/config.json
+  fi
+
+  echo "DEBUG: ${DOCKER_CONFIG}"
+  echo "DEBUG: ${ISTIO_REPO}:${ISTIO_BRANCH}"
+
+
   [ ! -d "${REPOSDIR}" ] && mkdir "${REPOSDIR}"
   trap 'echo "Removing ${REPOSDIR}" && ${RM} -rf "${REPOSDIR}"' EXIT
   
@@ -313,6 +315,7 @@ if [ -n "${BUILD}" ] || [ -n "${PUSH}" ]; then
 
   for component in ${COMPONENTS}; do
     echo "[${component}] Clone the git repository "
+    
     get_repo "${component}"
 
     cd "${REPOSDIR}/${component}"
