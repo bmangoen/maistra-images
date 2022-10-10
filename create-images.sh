@@ -258,13 +258,9 @@ function exec_build() {
 
 ## MAIN
 printenv
-if [ -d "${DOCKER_CONFIG}" ]; then
-  ls "${DOCKER_CONFIG}"
-  cat "${DOCKER_CONFIG}"config.json
-fi
 
-echo "DEBUG: ${DOCKER_CONFIG}"
-echo "DEBUG: ${ISTIO_REPO}:${ISTIO_BRANCH}"
+echo "DEBUG: docker pull quay.io/bmangoen/hive-operator"
+docker pull quay.io/bmangoen/hive-operator
 
 while getopts ":t:h:i:c:bdpk" opt; do
 	case ${opt} in
