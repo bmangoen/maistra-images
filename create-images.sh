@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
@@ -264,6 +264,7 @@ if [ -d "${DOCKER_CONFIG}" ]; then
 fi
 
 echo "DEBUG: ${DOCKER_CONFIG}"
+echo "DEBUG: ${ISTIO_REPO}:${ISTIO_BRANCH}"
 
 while getopts ":t:h:i:c:bdpk" opt; do
 	case ${opt} in
