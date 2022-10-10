@@ -8,7 +8,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 : "${MAISTRA_PROJECT:=https://github.com/maistra}"
 
-: "${HUB:=quay.io/maistra-dev}"
+: "${HUB:=quay.io/bmangoen}"
 : "${TAG:="${MAISTRA_VERSION}"}"
 
 : "${ISTIO_REPO:="${MAISTRA_PROJECT}/istio.git"}"
@@ -257,6 +257,14 @@ function exec_build() {
 }
 
 ## MAIN
+printenv
+if [ -d "${DOCKER_CONFIG}" ]; then
+  ls "${DOCKER_CONFIG}"
+  cat "${DOCKER_CONFIG}"/config.json
+fi
+
+echo "DEBUG: ${DOCKER_CONFIG}"
+
 while getopts ":t:h:i:c:bdpk" opt; do
 	case ${opt} in
 		t) TAG="${OPTARG}";;
